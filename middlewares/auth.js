@@ -1,5 +1,15 @@
 const jwt = require("jsonwebtoken");
-
+/**
+ * Middleware function for authenticating a user's request.
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {function} next - The next middleware function in the chain.
+ *
+ * @throws {Error} If there is an error verifying the user's token.
+ *
+ * @returns {void}
+ */
 const auth = async (req, res, next) => {
   try {
     const token = req.header("x-auth-token");

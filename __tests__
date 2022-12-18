@@ -1,0 +1,11 @@
+const request = require('supertest');
+const authRouter = require('../routes/authRouter');
+
+test('POST /registerUser', async () => {
+  const res = await request(authRouter)
+    .post('/registerUser')
+    .send({ name: 'John', phoneNumber: '1234567890', email: 'shaddy@example.com', password: 'password' });
+
+  expect(res.statusCode).toBe(400);
+  expect(res.body).toEqual({ msg: "User with same email or phone number already exists!" });
+});

@@ -1,7 +1,25 @@
+/**
+
+A schema for representing a user in a database.
+@module user
+@param {Object} mongoose - The mongoose object.
+@param {Object} userSchema - The user schema.
+@param {String} name - The name of the user.
+@param {String} email - The email of the user.
+@param {String} password - The password of the user.
+@param {String} phoneNumber - The phone number of the user.
+@param {String} address - The address of the user.
+@param {String} type - The type of user (user or admin).
+@param {Boolean} verified - Whether or not the user has been verified.
+@param {Object} User - The User model.
+@param {Object} exports - The exports object.
+*/
+
+
+
+
 const mongoose = require('mongoose');
-const validator =require('validator')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+
 const userSchema = mongoose.Schema({
   name: {
     required: true,
@@ -37,28 +55,16 @@ const userSchema = mongoose.Schema({
     type: String,
     default: "user",
   },
+  verified: {
+    type: Boolean,
+    default:"false"
+  
+  },
  
 });
-/*
-userSchema.pre('save', async function (next) {
-    const user = this
-    if(user.isModified('password')){
-      user.password = await bcrypt.hash(user.password,8)
-    }
-})
 
-userSchema.static.findByCredentials = async(phoneNumber,password)=> {
-  const user = await User.findOne({phoneNumber})
-  if(!user) {
-    throw new error ({ error: "invalid login data"})
 
-  }
-  const isPasswordMatch = await bcrypt.compare(password, user.password)
-  if(!isPasswordMatch) {
-    throw new error ({ error: "invalid login password"})
-  }
-  return user
-}
-*/
+
+
 const User = mongoose.model('User', userSchema)
 module.exports =User
